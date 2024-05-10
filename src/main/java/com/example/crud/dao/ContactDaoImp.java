@@ -138,6 +138,9 @@ public class ContactDaoImp implements ContactDao {
                 contact.setEmail(preparedStatement.getResultSet().getString("email"));
                 contact.setPhone(preparedStatement.getResultSet().getString("phone"));
                 contact.setType(preparedStatement.getResultSet().getString("type"));
+                if (contacts == null) {
+                    contacts = new ArrayList<>();
+                }
                 contacts.add(contact);
             }
         } catch (Exception e) {

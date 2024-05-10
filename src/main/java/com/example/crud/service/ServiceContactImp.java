@@ -42,7 +42,10 @@ public class ServiceContactImp implements ServiceContact{
 
     @Override
     public List<Contact> searchContact(String motcle) {
-        return contactDao.searchContact(motcle);
+        if (!motcle.isEmpty()) {
+            return contactDao.searchContact(motcle);
+        }
+        return null;
     }
 
 }

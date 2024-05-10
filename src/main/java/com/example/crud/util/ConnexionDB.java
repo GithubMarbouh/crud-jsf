@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class ConnexionDB {
-    private static final String URL = "jdbc:mysql://db-mysql-nyc3-45425-do-user-15838371-0.c.db.ondigitalocean.com:25060/defaultdb?useSSL=false&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://dbaas-db-7965936-do-user-15838371-0.c.db.ondigitalocean.com:25060/defaultdb?useSSL=false&serverTimezone=UTC";
     private static final String USER = "doadmin";
-    private static final String PASSWORD = "AVNS_5U-vQolWA6URKlAM6qi";
+    private static final String PASSWORD = "AVNS_LBM3vY3Gn2pg6_k8TiR";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static Connection connection;
 

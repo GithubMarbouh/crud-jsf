@@ -95,7 +95,7 @@
                     <a class="navbar-brand fs-3" href="#"><i class="bi-infinity"></i> Infinity Contacts</a>
 
                     <button class="navbar-toggler border-white border-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <i class="bi-list fs-1 text-white"></i>
+                        <i  class="bi-list fs-1 text-white"></i>
                     </button>
 
                     <div class="collapse navbar-collapse fs-5 justify-content-end" id="navbarNav">
@@ -130,18 +130,78 @@
 <!--                        </a>-->
 <!--                        <h:commandButton value="Enregistrer les modifications" styleClass="btn btn-danger btn-lg fs-5 mx-2" />-->
 <!--                    </div>-->
-                    <div class="col-12 col  d-flex justify-content-center mb-4 my-0 ">
-                        <div class="input-group my-auto">
-                            <input type="text" class="form-control" placeholder="Rechercher un contact" />
-                            <button class="btn btn-danger" type="button"><span>
-                               <i>search</i>
-                            </span>
-                            </button>
-                        </div>
-                    </div>
+
+<!--                    <div class="col-12 col  d-flex justify-content-center mb-4 my-0 ">-->
+<!--                        <div class="input-group my-auto">-->
+<!--                            <h:inputText  type="text" class="form-control mx-2" placeholder="Rechercher un contact" value="#{search.motCle}"/>-->
+<!--                            <h:commandButton value="Rechercher" styleClass="btn btn-secondary btn-sm fs-6 fw-bold bi-pencil-square " action="#{search.ChangeIsSearch()}"/>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
 
                 </div>
+                <!---&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+                <div class="row mt-1">
+                    <div class="col table-responsive px-3">
+                        <h:form method="post" action="#"  >
+                            <div class="col-12 col  d-flex justify-content-center mb-4 my-0 ">
+                                <div class="input-group my-auto">
+                                    <h:inputText  type="text" class="form-control mx-2" placeholder="Rechercher un contact" value="#{search.motCle}"/>
+                                    <h:commandButton value="Rechercher" styleClass="btn btn-secondary btn-sm fs-6 fw-bold bi-pencil-square " action="#{search.ChangeIsSearch()}"/>
+                                </div>
 
+                            </div>
+                            <h:form rendered="#{search.isSearch}">
+                            <h:dataTable  value="#{search.SearchContact(search.motCle)}" var="item" styleClass="table table-striped text-nowrap fs-5" >
+                                <h:column styleClass="bg-primary">
+                                    <f:facet name="header">
+                                        <h:outputText value="Nom" />
+                                    </f:facet>
+                                    <h:inputText  value="#{edit.id}" rendered="#{item.id eq contact.editingId}" style="display: none;"/>
+                                    <h:inputText  value="#{edit.name}" rendered="#{item.id eq contact.editingId}"/>
+                                    <h:outputText  value="#{item.name}" rendered="#{item.id ne contact.editingId}"/>
+                                </h:column>
+                                <h:column styleClass="bg-danger">
+                                    <f:facet name="header">
+                                        <h:outputText value="E-mail" />
+                                    </f:facet>
+                                    <h:inputText   value="#{edit.email}" rendered="#{item.id eq contact.editingId}"/>
+                                    <h:outputText  value="#{item.email}" rendered="#{item.id ne contact.editingId}"/>
+                                </h:column>
+                                <h:column styleClass="bg-success">
+                                    <f:facet name="header">
+                                        <h:outputText value="Téléphone"  />
+                                    </f:facet>
+                                    <h:inputText  value="#{edit.phone}" rendered="#{item.id eq contact.editingId}" />
+                                    <h:outputText  value="#{item.phone}" rendered="#{item.id ne contact.editingId}" />
+                                </h:column>
+                                <h:column styleClass="bg-secondary">
+                                    <f:facet name="header">
+                                        <h:outputText value="Type" />
+                                    </f:facet>
+                                    <h:inputText  value="#{edit.type}" rendered="#{item.id eq contact.editingId}" />
+                                    <h:outputText  value="#{item.type}" rendered="#{item.id ne contact.editingId}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Actions" />
+                                    </f:facet>
+                                    <h:commandButton value="Éditer" styleClass="btn btn-secondary btn-sm fs-6 fw-bold bi-pencil-square m-2" action="#{contact.UpdateIsDisabled(item.id)}"/>
+                                    <h:commandButton value="Supprimer" styleClass="btn btn-danger btn-sm fs-6 fw-bold bi-x-lg" action="#{contact.deleteContact(item.id)}" />
+                                </h:column>
+                            </h:dataTable>
+                            <div class="col mb-3 d-flex justify-content-end">
+                                <a class="text-bg-danger rounded" href="faces/addcontact.xhtml">
+                                    <h:commandButton value="Annuler" styleClass="btn btn-danger btn-lg fs-5" action="#{search.ChangeIsSearch()}" />
+                                </a>
+                                <h:commandButton value="Enregistrer les modifications" styleClass="btn btn-danger btn-lg fs-5 mx-2" action="#{contact.UpdateContact(edit)}" />
+                            </div>
+                            </h:form>
+                        </h:form>
+
+                    </div>
+                </div>
+                <!--               &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
                 <div class="row mt-1">
                     <div class="col table-responsive px-3">
                         <h:form method="post" action="#">
@@ -150,36 +210,36 @@
                                 <f:facet name="header">
                                     <h:outputText value="Nom" />
                                 </f:facet>
-                                <h:inputText  value="#{edit.id}" rendered="#{item.id eq contact.editingId}" style="display: none;"/>
-                                <h:inputText  value="#{edit.name}" rendered="#{item.id eq contact.editingId}"/>
-                                <h:outputText  value="#{item.name}" rendered="#{item.id ne contact.editingId}"/>
+                                <h:inputText  value="#{edit.id}" rendered="#{item.id eq edit.editingId}" style="display: none;"/>
+                                <h:inputText  value="#{edit.name}" rendered="#{item.id eq edit.editingId}"/>
+                                <h:outputText  value="#{item.name}" rendered="#{item.id ne edit.editingId}"/>
                             </h:column>
                             <h:column styleClass="bg-danger">
                                 <f:facet name="header">
                                     <h:outputText value="E-mail" />
                                 </f:facet>
-                                <h:inputText   value="#{edit.email}" rendered="#{item.id eq contact.editingId}"/>
-                                <h:outputText  value="#{item.email}" rendered="#{item.id ne contact.editingId}"/>
+                                <h:inputText   value="#{edit.email}" rendered="#{item.id eq edit.editingId}"/>
+                                <h:outputText  value="#{item.email}" rendered="#{item.id ne edit.editingId}"/>
                             </h:column>
                             <h:column styleClass="bg-success">
                                 <f:facet name="header">
                                     <h:outputText value="Téléphone"  />
                                 </f:facet>
-                                <h:inputText  value="#{edit.phone}" rendered="#{item.id eq contact.editingId}" />
-                                <h:outputText  value="#{item.phone}" rendered="#{item.id ne contact.editingId}" />
+                                <h:inputText  value="#{edit.phone}" rendered="#{item.id eq edit.editingId}" />
+                                <h:outputText  value="#{item.phone}" rendered="#{item.id ne edit.editingId}" />
                             </h:column>
                             <h:column styleClass="bg-secondary">
                                 <f:facet name="header">
                                     <h:outputText value="Type" />
                                 </f:facet>
-                                <h:inputText  value="#{edit.type}" rendered="#{item.id eq contact.editingId}" />
-                                <h:outputText  value="#{item.type}" rendered="#{item.id ne contact.editingId}" />
+                                <h:inputText  value="#{edit.type}" rendered="#{item.id eq edit.editingId}" />
+                                <h:outputText  value="#{item.type}" rendered="#{item.id ne edit.editingId}" />
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Actions" />
                                 </f:facet>
-                                <h:commandButton value="Éditer" styleClass="btn btn-secondary btn-sm fs-6 fw-bold bi-pencil-square m-2" action="#{contact.UpdateIsDisabled(item.id)}"/>
+                                <h:commandButton value="Éditer" styleClass="btn btn-secondary btn-sm fs-6 fw-bold bi-pencil-square m-2" action="#{edit.UpdateIsDisabled(item.id)}"/>
                                 <h:commandButton value="Supprimer" styleClass="btn btn-danger btn-sm fs-6 fw-bold bi-x-lg" action="#{contact.deleteContact(item.id)}" />
                             </h:column>
                         </h:dataTable>
@@ -187,7 +247,7 @@
                                 <a class="text-bg-danger rounded" href="faces/addcontact.xhtml">
                                     <h:commandButton value="Ajouter Contact" styleClass="btn btn-danger btn-lg fs-5" action="faces/addcontact.xhtml" />
                                 </a>
-                                <h:commandButton value="Enregistrer les modifications" styleClass="btn btn-danger btn-lg fs-5 mx-2" action="#{contact.UpdateContact(edit)}" />
+                                <h:commandButton value="Enregistrer les modifications" styleClass="btn btn-danger btn-lg fs-5 mx-2" action="#{edit.UpdateContact(edit)}" />
                             </div>
 
                         </h:form>
